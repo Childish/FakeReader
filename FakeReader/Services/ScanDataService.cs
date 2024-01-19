@@ -14,14 +14,14 @@
                 Data = new DocumentReaderSecurity.DocumentReaderSecurityResultDataModel
                 {
                     _DateOfScan = DateTime.Now,
-                    FirstName = "Jay",
-                    LastName = "Sparks",
+                    FirstName = "John",
+                    LastName = "Doe",
                     Gender = "M",
-                    BirthDate = "11/08/1995",
+                    BirthDate = "01/01/1990",
                     IDNumber = "11111111",
-                    ExpiryDate = "1/1/2025",
-                    IssueDate = "1/1/2020",
-                    Nationality_EN = "British, UK"
+                    ExpiryDate = "01/01/2025",
+                    IssueDate = "01/01/2020",
+                    Nationality = "GBR"
                 }
             };
 

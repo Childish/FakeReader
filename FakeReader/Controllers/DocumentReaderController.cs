@@ -17,18 +17,9 @@ namespace FakeReader.Controllers
         }
 
         [HttpGet]
-        public IActionResult IDReader(int? includefaceimage, int? includeimagenormallight, int? id)
+        public IActionResult IDReader(int? includefaceimage, int? includeimagenormallight, string? callback, int? id)
         {
-            // Extract callback parameters from the query
-            var callbackParameters = HttpContext.Request.Query["callback"];
-            string callbackName = null;
-
-            if (callbackParameters.Count > 0)
-            {
-                callbackName = callbackParameters.Last(); // Prioritize the jQuery-generated callback
-            }
-
-            if (string.IsNullOrEmpty(callbackName))
+            if (string.IsNullOrEmpty(callback))
             {
                 return BadRequest("Callback parameter is required.");
             }
@@ -38,14 +29,14 @@ namespace FakeReader.Controllers
                 var scanData = _scanDataService.GetScanData(id.Value);
                 if (scanData != null)
                 {
-                    return Jsonp(scanData, callbackName);
+                    return Jsonp(scanData, callback);
                 }
-                return Jsonp(new { status = "error", reason = "Scan not completed or invalid ID" }, callbackName);
+                return Jsonp(new { status = "error", reason = "Scan not completed or invalid ID" }, callback);
             }
             else
             {
                 var scanId = _scanDataService.CreateNewScanData();
-                return Jsonp(new { id = scanId }, callbackName);
+                return Jsonp(new { id = scanId }, callback);
             }
         }
 
